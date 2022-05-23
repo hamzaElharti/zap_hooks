@@ -191,6 +191,7 @@ class ZapAuthCusto:
                     # login flow: username -> next -> password -> submit
                     self.fill_password()
         except Exception:
+            logging.info("Trying login using name attribute")
             username_element = self.fill_username_using_name_attribute()
             self.fill_password_using_name_attribute()
 
@@ -241,9 +242,9 @@ class ZapAuthCusto:
                                           "(//input[((@type='text' or @type='email') and contains(@name,'ser')) or ((@type='text' or @type='email') and contains(@name,'login')) or (@type='text' or @type='email')])[1]")
 
     def fill_username_using_name_attribute(self):
-        element = self.driver.find_element_by_name(self.config.auth_username_field_name)
+        element = self.driver.find_element_by_name("login")
         element.clear()
-        element.send_keys(self.config.auth_username)
+        element.send_keys("password")
         return element
     
     def fill_password(self):
