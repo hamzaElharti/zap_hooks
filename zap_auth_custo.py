@@ -177,19 +177,27 @@ class ZapAuthCusto:
 
         # fill out the username field
         if self.config.auth_username:
-            username_element = self.fill_username()
+            try:
+                username_element = self.fill_username()
+            except Exception:
+                logging.error("error to fill the username: %s, Try by name attribute", traceback.print_exc())
+                username_element = self.fill_username_using_name_attribute()
 
         # fill out the password field
         if self.config.auth_password:
             try:
                 self.fill_password()
             except Exception:
-                logging.warning(
-                    'Did not find the password field - clicking Next button and trying again')
+                try:
+                    logging.error("error to fill the password: %s, Try by name attribute", traceback.print_exc())
+                    password_element = self.fill_password_using_name_attribute()
+                except Exception:
+                    logging.warning(
+                        'Did not find the password field - clicking Next button and trying again')
 
-                # if the password field was not found, we probably need to submit to go to the password page
-                # login flow: username -> next -> password -> submit
-                self.fill_password()
+                    # if the password field was not found, we probably need to submit to go to the password page
+                    # login flow: username -> next -> password -> submit
+                    self.fill_password()
 
         # fill out the OTP field
         if self.config.auth_otp_secret:
@@ -236,11 +244,23 @@ class ZapAuthCusto:
                                           "input",
                                           "(//input[((@type='text' or @type='email') and contains(@name,'ser')) or ((@type='text' or @type='email') and contains(@name,'login')) or (@type='text' or @type='email')])[1]")
 
+    def fill_username_using_name_attribute(self):
+        element = self.driver.find_element_by_name(self.config.auth_username_field_name)
+        element.clear()
+        element.send_keys(self.config.auth_username)
+        return element
+    
     def fill_password(self):
         return self.find_and_fill_element(self.config.auth_password,
                                           self.config.auth_password_field_name,
                                           "password",
                                           "//input[@type='password' or contains(@name,'ass')]")
+
+    def fill_password_using_name_attribute(self):
+        element = self.driver.find_element_by_name(self.config.auth_password_field_name)
+        element.clear()
+        element.send_keys(self.config.auth_password)
+        return element
 
     def fill_otp(self):
         totp = pyotp.TOTP(self.config.auth_otp_secret)
@@ -255,7 +275,7 @@ class ZapAuthCusto:
 
     def find_and_fill_element(self, value, name, element_type, xpath):
         element = self.find_element(name, element_type, xpath)
-        logging.info("#### element: tag_name=%s, accessible_name=%s",element.tag_name, element.accessible_name)
+        logging.info("#### element: tag_name=%s",element.tag_name)
         element.clear()
         element.send_keys(value)
         logging.info('Filled the %s element', name)
