@@ -1,9 +1,13 @@
-from wrk.custom_hooks.zap_auth_custo.zap_auth_custo import ZapAuthCusto
+#from wrk.custom_hooks.zap_auth_custo.zap_auth_custo import ZapAuthCusto
+sys.path.append('/zap/wrk/custom_hooks')
+import zap_auth_custo
 import zap_config
 import zap_blindxss
 import os
 import traceback
 import logging
+
+
 
 
 config = zap_config.ZapConfig()
@@ -26,7 +30,7 @@ def zap_started(zap, target):
         scan_policy = 'Default Policy'
         zap.ascan.update_scan_policy(scanpolicyname=scan_policy , attackstrength="LOW")
         
-        auth = ZapAuthCusto(config)
+        auth = zap_auth_custo.ZapAuthCusto(config)
         auth.authenticate(zap, target)
 
         zap_blindxss.load(config, zap)
