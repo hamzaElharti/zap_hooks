@@ -187,7 +187,7 @@ class ZapAuthCusto:
         if self.config.auth_password:
             try:
                 logging.error("error to fill password: %s, Try by name attribute", traceback.print_exc())
-                    password_element = self.fill_password_using_name_attribute()
+                password_element = self.fill_password_using_name_attribute()
             except Exception:
                 try:
                     self.fill_password()
