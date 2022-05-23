@@ -67,6 +67,7 @@ class ZapAuthCusto:
         self.driver = webdriver.Chrome(options=options)
         self.driver.set_window_size(1920, 1080)
         self.driver.maximize_window()
+        self.driver.implicitly_wait(20)
 
     def authenticate(self, zap, target):
         try:
@@ -242,9 +243,9 @@ class ZapAuthCusto:
                                           "(//input[((@type='text' or @type='email') and contains(@name,'ser')) or ((@type='text' or @type='email') and contains(@name,'login')) or (@type='text' or @type='email')])[1]")
 
     def fill_username_using_name_attribute(self):
-        element = self.driver.find_element_by_name("login")
+        element = self.driver.find_element_by_name(self.config.auth_username_field_name)
         element.clear()
-        element.send_keys("password")
+        element.send_keys(self.config.auth_username)
         return element
     
     def fill_password(self):
