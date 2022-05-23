@@ -4,6 +4,7 @@ import zap_blindxss
 import os
 import traceback
 import logging
+from wrk.custom_hooks.zap_auth_custo import ZapAuthCusto
 
 config = zap_config.ZapConfig()
 
