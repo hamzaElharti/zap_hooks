@@ -61,6 +61,7 @@ class ZapAuthCusto:
         if not self.config.auth_display:
             options.add_argument('--headless')
         options.add_argument('--ignore-certificate-errors')
+        options.add_argument('ignore-certificate-errors')
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-dev-shm-usage')
 
