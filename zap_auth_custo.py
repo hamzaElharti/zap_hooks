@@ -175,29 +175,25 @@ class ZapAuthCusto:
 
         username_element = None
 
-        # fill out the username field
-        if self.config.auth_username:
-            try:
-                logging.error("error to fill username: %s, Try by name attribute", traceback.print_exc())
-                username_element = self.fill_username_using_name_attribute()
-            except Exception:
-                username_element = self.fill_username()
+        try:
+            # fill out the username field
+            if self.config.auth_username:
+            username_element = self.fill_username()
                 
-        # fill out the password field
-        if self.config.auth_password:
+            # fill out the password field
+            if self.config.auth_password:
             try:
-                logging.error("error to fill password: %s, Try by name attribute", traceback.print_exc())
-                password_element = self.fill_password_using_name_attribute()
+                self.fill_password()
             except Exception:
-                try:
-                    self.fill_password()
-                except Exception:
-                    logging.warning(
-                        'Did not find the password field - clicking Next button and trying again')
+                logging.warning(
+                    'Did not find the password field - clicking Next button and trying again')
+                # if the password field was not found, we probably need to submit to go to the password page
+                # login flow: username -> next -> password -> submit
+                self.fill_password()
+        except Exception:
+            username_element = self.fill_username_using_name_attribute()
+            self.fill_password_using_name_attribute()
 
-                    # if the password field was not found, we probably need to submit to go to the password page
-                    # login flow: username -> next -> password -> submit
-                    self.fill_password()
 
         # fill out the OTP field
         if self.config.auth_otp_secret:
