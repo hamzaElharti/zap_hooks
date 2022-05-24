@@ -79,7 +79,9 @@ class ZapAuthCusto:
 
         httpProxyEv = os.environ['HTTP_PROXY']
         logging.info("###### httpProxyEv %s", httpProxyEv)
-        print(f'{username} home directory is {home_dir}')
+        logging.info("****** reset HTTP_PROXY env variable ******")
+        os.environ['HTTP_PROXY'] = ""
+        logging.info("###### new value httpProxyEv %s", httpProxyEv)
         self.driver = webdriver.Chrome(options=options)
         self.driver.set_window_size(1920, 1080)
         self.driver.maximize_window()
