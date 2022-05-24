@@ -12,17 +12,20 @@ import logging
 
 
 
-config = zap_config.ZapConfig()
+config = zap_config_custo.ZapConfigCusto()
 
 # Triggered when running a script directly (ex. python zap-baseline.py ...)
 def start_docker_zap(docker_image, port, extra_zap_params, mount_dir):
     config.load_config(extra_zap_params)
+    logging.info("****** zap extra_zap_params: %s",extra_zap_params)
 
 # Triggered when running from the Docker image
 def start_zap(port, extra_zap_params):
     config.load_config(extra_zap_params)
+    logging.info("******from the Docker image, extra_zap_params: %s",extra_zap_params)
 
 def zap_started(zap, target):
+    logging.info("******zap_started zap config: %s",config)
     try:
         # ZAP Docker scripts reset the target to the root URL
         if target.count('/') > 2:
