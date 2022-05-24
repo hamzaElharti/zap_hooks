@@ -77,11 +77,15 @@ class ZapAuthCusto:
 
         #self.driver = webdriver.Chrome(options=options, desired_capabilities=capabilities)
 
-        httpProxyEv = os.environ['HTTP_PROXY']
-        logging.info("###### httpProxyEv %s", httpProxyEv)
-        logging.info("****** reset HTTP_PROXY env variable ******")
-        os.environ['HTTP_PROXY'] = ""
-        logging.info("###### new value httpProxyEv %s", httpProxyEv)
+        if 'HTTP_PROXY' in os.environ:
+            httpProxyEv = os.environ['HTTP_PROXY']
+            logging.info("###### httpProxyEv %s", httpProxyEv)
+            logging.info("****** reset HTTP_PROXY env variable ******")
+            os.environ['HTTP_PROXY'] = ""
+            logging.info("###### new value httpProxyEv %s", httpProxyEv)
+            del os.environ['HTTP_PROXY']
+
+        
         self.driver = webdriver.Chrome(options=options)
         self.driver.set_window_size(1920, 1080)
         self.driver.maximize_window()
