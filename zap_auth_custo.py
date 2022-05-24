@@ -76,6 +76,10 @@ class ZapAuthCusto:
         #options.add_argument('--proxy-server=%s' % proxy_ip_port)
 
         #self.driver = webdriver.Chrome(options=options, desired_capabilities=capabilities)
+
+        httpProxyEv = os.environ['HTTP_PROXY']
+        logging.info("###### httpProxyEv %s", httpProxyEv)
+        print(f'{username} home directory is {home_dir}')
         self.driver = webdriver.Chrome(options=options)
         self.driver.set_window_size(1920, 1080)
         self.driver.maximize_window()
