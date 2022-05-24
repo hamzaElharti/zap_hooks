@@ -166,6 +166,9 @@ class ZapAuthCusto:
 
     def login(self):
         proxy_error = "This category is blocked: Private IP Addresses."
+        alert = self.driver.find_element_by_id("reason-text")
+        if proxy_error.find(alert.text) != -1:
+            logging.error("!!!!!!! Cannot access the URL, The proxy blocked the connection !!!!!!")
         logging.info('authenticate using webdriver against URL: %s',
                      self.config.auth_login_url)
 
@@ -253,6 +256,8 @@ class ZapAuthCusto:
 
     def fill_username_using_name_attribute(self):
         element = self.driver.find_element_by_name(self.config.auth_username_field_name)
+        logging.inf("################### username ######################")
+        loggin.info(element)
         element.clear()
         element.send_keys(self.config.auth_username)
         return element
@@ -265,6 +270,8 @@ class ZapAuthCusto:
 
     def fill_password_using_name_attribute(self):
         element = self.driver.find_element_by_name(self.config.auth_password_field_name)
+         logging.inf("################### password ######################")
+        loggin.info(element)
         element.clear()
         element.send_keys(self.config.auth_password)
         return element
