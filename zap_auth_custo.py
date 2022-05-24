@@ -55,6 +55,7 @@ class ZapAuthCusto:
             logging.info('Excluded %s', exclude)
 
     def setup_webdriver(self):
+        PROXY = "10.4.4.10:8080" # IP:PORT or HOST:PORT
         logging.info('Start webdriver')
 
         options = webdriver.ChromeOptions()
@@ -64,6 +65,7 @@ class ZapAuthCusto:
         options.add_argument('ignore-certificate-errors')
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-dev-shm-usage')
+        options.add_argument('--proxy-server=%s' % PROXY)
 
         self.driver = webdriver.Chrome(options=options)
         self.driver.set_window_size(1920, 1080)
