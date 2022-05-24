@@ -68,7 +68,7 @@ class ZapAuthCusto:
         options = webdriver.ChromeOptions()
         if not self.config.auth_display:
             options.add_argument('--headless')
-        options.add_argument('--ignore-certificate-errors')
+        #options.add_argument('--ignore-certificate-errors')
         options.add_argument('ignore-certificate-errors')
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-dev-shm-usage')
@@ -76,16 +76,6 @@ class ZapAuthCusto:
         #options.add_argument('--proxy-server=%s' % proxy_ip_port)
 
         #self.driver = webdriver.Chrome(options=options, desired_capabilities=capabilities)
-
-        if 'HTTP_PROXY' in os.environ:
-            httpProxyEv = os.environ['HTTP_PROXY']
-            logging.info("###### httpProxyEv %s", httpProxyEv)
-            logging.info("****** reset HTTP_PROXY env variable ******")
-            os.environ['HTTP_PROXY'] = ""
-            logging.info("###### new value httpProxyEv %s", httpProxyEv)
-            del os.environ['HTTP_PROXY']
-
-        
         self.driver = webdriver.Chrome(options=options)
         self.driver.set_window_size(1920, 1080)
         self.driver.maximize_window()
