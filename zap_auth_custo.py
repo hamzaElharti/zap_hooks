@@ -75,7 +75,8 @@ class ZapAuthCusto:
         options.add_argument('--no-proxy-server')
         #options.add_argument('--proxy-server=%s' % proxy_ip_port)
 
-        self.driver = webdriver.Chrome(options=options, desired_capabilities=capabilities)
+        #self.driver = webdriver.Chrome(options=options, desired_capabilities=capabilities)
+        self.driver = webdriver.Chrome(options=options)
         self.driver.set_window_size(1920, 1080)
         self.driver.maximize_window()
         self.driver.implicitly_wait(20)
