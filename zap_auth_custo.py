@@ -12,6 +12,7 @@ from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.proxy import Proxy, ProxyType
 import browserstorage
 import pyotp
 
@@ -55,7 +56,13 @@ class ZapAuthCusto:
             logging.info('Excluded %s', exclude)
 
     def setup_webdriver(self):
-        PROXY = "proxy.eurafric.com:8080" # IP:PORT or HOST:PORT
+        proxy_ip_port = "10.4.4.10:8080" # IP:PORT or HOST:PORT
+        proxy = Proxy()
+        proxy.proxy_type = ProxyType.MANUAL
+        proxy.http_proxy = proxy_ip_port
+        proxy.ssl_proxy = proxy_ip_port
+        capabilities = webdriver.DesiredCapabilities.CHROME
+        proxy.add_to_capabilities(capabilities)
         logging.info('Start webdriver')
 
         options = webdriver.ChromeOptions()
@@ -65,9 +72,9 @@ class ZapAuthCusto:
         options.add_argument('ignore-certificate-errors')
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-dev-shm-usage')
-        options.add_argument('--proxy-server=%s' % PROXY)
+        #options.add_argument('--proxy-server=%s' % proxy_ip_port)
 
-        self.driver = webdriver.Chrome(options=options)
+        self.driver = webdriver.Chrome(options=options, desired_capabilities=capabilities)
         self.driver.set_window_size(1920, 1080)
         self.driver.maximize_window()
         self.driver.implicitly_wait(20)
