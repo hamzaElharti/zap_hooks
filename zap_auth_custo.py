@@ -55,7 +55,7 @@ class ZapAuthCusto:
             logging.info('Excluded %s', exclude)
 
     def setup_webdriver(self):
-        PROXY = "10.4.4.10:8080" # IP:PORT or HOST:PORT
+        PROXY = "proxy.eurafric.com:8080" # IP:PORT or HOST:PORT
         logging.info('Start webdriver')
 
         options = webdriver.ChromeOptions()
