@@ -3,7 +3,7 @@
 import sys
 sys.path.append('/zap/wrk/custom_hooks')
 import zap_auth_custo
-import zap_config
+import zap_config_custo
 import zap_blindxss
 import os
 import traceback
