@@ -173,7 +173,7 @@ class ZapAuthCusto:
 
         # wait for the page to load
         time.sleep(5)
-        logging.info("######### page title: ",self.driver.title)
+        logging.info("######### page title: %s",self.driver.title)
         alert = self.driver.find_element_by_id("reason-text")
         if proxy_error.find(alert.text) != -1:
             logging.error("!!!!!!! Cannot access the URL, The proxy blocked the connection !!!!!!")
