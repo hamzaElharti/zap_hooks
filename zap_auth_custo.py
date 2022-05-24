@@ -212,11 +212,11 @@ class ZapAuthCusto:
                 username_element = self.fill_username_using_name_attribute()
                 try:
                     self.fill_password_using_name_attribute()
-                    except Exception:
-                        username_element.send_keys(Keys.RETURN)
-                        time.sleep(self.config.auth_check_delay)
-                        self.fill_password_using_name_attribute()
-                        username_element.send_keys(Keys.RETURN)
+                except Exception:
+                    username_element.send_keys(Keys.RETURN)
+                    time.sleep(self.config.auth_check_delay)
+                    self.fill_password_using_name_attribute()
+                    username_element.send_keys(Keys.RETURN)
             except Exception:
                 ## search for alerts and errors in the current page
                 alert = self.driver.find_element_by_id("reason-text")
