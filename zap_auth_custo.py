@@ -165,6 +165,7 @@ class ZapAuthCusto:
             "Authorization header added: %s", auth_token)
 
     def login(self):
+        proxy_error = "This category is blocked: Private IP Addresses."
         logging.info('authenticate using webdriver against URL: %s',
                      self.config.auth_login_url)
 
@@ -193,9 +194,16 @@ class ZapAuthCusto:
                     # login flow: username -> next -> password -> submit
                     self.fill_password()
         except Exception:
-            logging.info("Trying login using name attribute")
-            username_element = self.fill_username_using_name_attribute()
-            self.fill_password_using_name_attribute()
+            try:
+                logging.info("Trying login using name attribute")
+                username_element = self.fill_username_using_name_attribute()
+                self.fill_password_using_name_attribute()
+            except Exception:
+                ## search for alerts and errors in the current page
+                alert = self.driver.find_element_by_id("reason-text")
+                if proxy_error.find(alert.text) != -1:
+                    logging.error("Cannot access the URL")
+            
 
 
         # fill out the OTP field
