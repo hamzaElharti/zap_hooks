@@ -271,7 +271,7 @@ class ZapAuthCusto:
                                           "(//input[((@type='text' or @type='email') and contains(@name,'ser')) or ((@type='text' or @type='email') and contains(@name,'login')) or (@type='text' or @type='email')])[1]")
 
     def fill_username_using_name_attribute(self):
-        element = self.driver.find_element_by_name(self.config.auth_username_field_name)
+        element = self.driver.find_element_by_name(self.config.auth_username_field_name_attr_value)
         logging.info("################### username ######################")
         loggin.info(element)
         element.clear()
@@ -285,7 +285,7 @@ class ZapAuthCusto:
                                           "//input[@type='password' or contains(@name,'ass')]")
 
     def fill_password_using_name_attribute(self):
-        element = self.driver.find_element_by_name(self.config.auth_password_field_name)
+        element = self.driver.find_element_by_name(self.config.auth_password_field_name_attr_value)
         logging.info("################### password ######################")
         loggin.info(element)
         element.clear()

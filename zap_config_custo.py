@@ -31,7 +31,7 @@ class ZapConfigCusto:
             self.auth_include_urls = self._get_zap_param_list('auth.include') or list()
             self.xss_collector = self._get_zap_param('xss.collector') or ''
 
-            self.auth_username_field_name_attr_value = self._get_zap_param('auth..auth_username_field_name_attr_value') or ''
+            self.auth_username_field_name_attr_value = self._get_zap_param('auth.auth_username_field_name_attr_value') or ''
             self.auth_password_field_name_attr_value = self._get_zap_param('auth.auth_password_field_name_attr_value') or ''
             
         except Exception:
