@@ -83,7 +83,8 @@ class ZapAuthCusto:
 
         #self.driver = webdriver.Chrome(options=options, desired_capabilities=capabilities)
         #self.driver = webdriver.Chrome(options=options)
-        self.driver = webdriver.Firefox(executable_path=fireFoxDriverPath)
+        binary = FirefoxBinary(fireFoxDriverPath)
+        self.driver = webdriver.Firefox(firefox_binary=binary, firefox_profile=profile)
         self.driver.set_window_size(1920, 1080)
         self.driver.maximize_window()
         self.driver.implicitly_wait(20)
