@@ -57,7 +57,7 @@ class ZapAuthCusto:
             logging.info('Excluded %s', exclude)
 
     def setup_webdriver(self):
-        fireFoxDriverPath = "/zap/wrk/webDrivers/geckodriver"
+        #fireFoxDriverPath = "/zap/wrk/webDrivers/geckodriver"
         #proxy_ip_port = "10.4.4.10:8080" # IP:PORT or HOST:PORT
         #proxy = Proxy()
         #proxy.proxy_type = ProxyType.MANUAL
@@ -77,15 +77,15 @@ class ZapAuthCusto:
         options.add_argument('--no-proxy-server')
         #options.add_argument('--proxy-server=%s' % proxy_ip_port)*
 
-        profile = webdriver.FirefoxProfile()
-        profile.set_preference('network.proxy.Kind','Direct')
-        profile.accept_untrusted_certs = True
+        #profile = webdriver.FirefoxProfile()
+        #profile.set_preference('network.proxy.Kind','Direct')
+        #profile.accept_untrusted_certs = True
 
 
         #self.driver = webdriver.Chrome(options=options, desired_capabilities=capabilities)
-        #self.driver = webdriver.Chrome(options=options)
-        binary = FirefoxBinary(fireFoxDriverPath)
-        self.driver = webdriver.Firefox(firefox_binary=binary, firefox_profile=profile)
+        self.driver = webdriver.Chrome(options=options)
+        #binary = FirefoxBinary(fireFoxDriverPath)
+        #self.driver = webdriver.Firefox(firefox_binary=binary, firefox_profile=profile)
         self.driver.set_window_size(1920, 1080)
         self.driver.maximize_window()
         self.driver.implicitly_wait(20)
