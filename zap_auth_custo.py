@@ -15,6 +15,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.proxy import Proxy, ProxyType
 import browserstorage
 import pyotp
+from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 
 
 class ZapAuthCusto:
