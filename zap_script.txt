@@ -1,0 +1,20 @@
+#!/bin/bash +x
+
+echo "============================================================================="
+echo "Launch Scan on ${APP_TEST_URL}"
+echo "============================================================================="
+export HTTP_PROXY=""
+podman run -u root -e ZAP_PORT=8090 -v /app/zap/zap_podman_volume:/zap/wrk/:rw -t ictu/zap2docker-weekly \
+zap-full-scan.py -m 4 -a -I -j -t ${APP_TEST_URL} -r ${JOB_NAME}_REPORT_${BUILD_NUMBER}.html \
+--hook=/zap/wrk/custom_hooks/auth_hook.py -z "auth.loginurl=${APP_TEST_AUTHENTIFICATION_URL} \
+auth.username="${APP_TEST_LOGIN}" \
+auth.password="${APP_TEST_PASSWORD}" \ 
+auth.username_field="login" \
+auth.auth_username_field_name_attr_value="login" \
+auth.auth_password_field_name_attr_value="password" \ 
+auth.password_field="password""
+
+echo "============================================================================="
+echo "Remove all stoped containers"
+echo "============================================================================="
+yes | podman system prune
