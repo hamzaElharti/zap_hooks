@@ -57,7 +57,7 @@ class ZapAuthCusto:
             logging.info('Excluded %s', exclude)
 
     def setup_webdriver(self):
-        httpProxy = os.environ['HTTP_PROXY']
+        httpProxy = os.environ['http_proxy']
         logging.info("############ proxy: %s", httpProxy)
         #fireFoxDriverPath = "/zap/wrk/webDrivers/geckodriver"
         #proxy_ip_port = "10.4.4.10:8080" # IP:PORT or HOST:PORT
