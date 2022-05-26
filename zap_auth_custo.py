@@ -272,8 +272,12 @@ class ZapAuthCusto:
 
     def submit_form(self, submit_action, submit_field_name, username_element):
         if submit_action == "click":
-            element = self.find_element(
-                submit_field_name, "submit", "//*[@type='submit' or @type='button' or button]")
+            try:
+                element = self.find_element(
+                submit_field_name, "submit", "//*[@type='submit']")
+            except Exception:
+                element = self.find_element(
+                submit_field_name, "submit", "@type='button' or button")
             element.click()
             logging.info('Clicked the %s element', submit_field_name)
         elif username_element:
