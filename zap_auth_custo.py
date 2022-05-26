@@ -289,7 +289,7 @@ class ZapAuthCusto:
     def fill_username_using_name_attribute(self):
         element = self.driver.find_element_by_name(self.config.auth_username_field_name_attr_value)
         logging.info("################### username ######################")
-        loggin.info(element)
+        logging.info(element)
         element.clear()
         element.send_keys(self.config.auth_username)
         return element
@@ -303,7 +303,7 @@ class ZapAuthCusto:
     def fill_password_using_name_attribute(self):
         element = self.driver.find_element_by_name(self.config.auth_password_field_name_attr_value)
         logging.info("################### password ######################")
-        loggin.info(element)
+        logging.info(element)
         element.clear()
         element.send_keys(self.config.auth_password)
         return element
