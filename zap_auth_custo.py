@@ -57,37 +57,16 @@ class ZapAuthCusto:
             logging.info('Excluded %s', exclude)
 
     def setup_webdriver(self):
-        #httpProxy = os.environ['http_proxy']
-        #logging.info("############ proxy: %s", httpProxy)
-        #fireFoxDriverPath = "/zap/wrk/webDrivers/geckodriver"
-        #proxy_ip_port = "10.4.4.10:8080" # IP:PORT or HOST:PORT
-        #proxy = Proxy()
-        #proxy.proxy_type = ProxyType.MANUAL
-        #proxy.http_proxy = proxy_ip_port
-        #proxy.ssl_proxy = proxy_ip_port
-        #capabilities = webdriver.DesiredCapabilities.CHROME
-        #proxy.add_to_capabilities(capabilities)
         logging.info('Start webdriver')
 
         options = webdriver.ChromeOptions()
         if not self.config.auth_display:
             options.add_argument('--headless')
-        #options.add_argument('--ignore-certificate-errors')
         options.add_argument('ignore-certificate-errors')
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-dev-shm-usage')
         options.add_argument('--no-proxy-server')
-        #options.add_argument('--proxy-server=%s' % proxy_ip_port)*
-
-        #profile = webdriver.FirefoxProfile()
-        #profile.set_preference('network.proxy.Kind','Direct')
-        #profile.accept_untrusted_certs = True
-
-
-        #self.driver = webdriver.Chrome(options=options, desired_capabilities=capabilities)
         self.driver = webdriver.Chrome(options=options)
-        #binary = FirefoxBinary(fireFoxDriverPath)
-        #self.driver = webdriver.Firefox(firefox_binary=binary, firefox_profile=profile)
         self.driver.set_window_size(1920, 1080)
         self.driver.maximize_window()
         self.driver.implicitly_wait(20)
