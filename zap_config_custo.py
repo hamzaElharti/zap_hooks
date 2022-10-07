@@ -34,7 +34,7 @@ class ZapConfigCusto:
             self.auth_username_field_name_attr_value = self._get_zap_param('auth.auth_username_field_name_attr_value') or ''
             self.auth_password_field_name_attr_value = self._get_zap_param('auth.auth_password_field_name_attr_value') or ''
             self.auth_is_one_step_form = self._get_zap_param_boolean('auth.is_one_step_form') or True
-
+            
             
         except Exception:
             logging.error("error in start_docker_zap: %s", traceback.print_exc())

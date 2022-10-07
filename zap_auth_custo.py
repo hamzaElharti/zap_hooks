@@ -16,6 +16,8 @@ from selenium.webdriver.common.proxy import Proxy, ProxyType
 import browserstorage
 import pyotp
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
+from selenium.webdriver.common.keys import Keys
+
 
 
 class ZapAuthCusto:
@@ -235,9 +237,11 @@ class ZapAuthCusto:
                 self.fill_otp()
 
         # submit
-        self.submit_form(self.config.auth_submitaction,
+        try:
+            self.submit_form(self.config.auth_submitaction,
                          self.config.auth_submit_field_name, username_element)
-
+        except Exception:
+            username_element.send_keys(Keys.RETURN)
         # wait for the page to load
         if self.config.auth_check_element:
             try:

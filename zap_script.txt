@@ -18,3 +18,14 @@ echo "==========================================================================
 echo "Remove all stoped containers"
 echo "============================================================================="
 yes | podman system prune
+
+
+podman run -u root -v '/app/wiremock/requests:/home/wiremock/__files:rw --rm -p 8080:8080  --name wiremock wiremock/wiremock:2.33.2 
+localhost:8080/customer
+
+podman run -it --rm \
+--privileged \
+  -p 8080:8080 \
+  -v /app/wiremock/stubs:/home/wiremock \
+  wiremock/wiremock
+  

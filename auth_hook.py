@@ -1,7 +1,7 @@
 #from wrk.custom_hooks.zap_auth_custo.zap_auth_custo import ZapAuthCusto
 
 import sys
-sys.path.append('/zap/wrk/custom_hooks')
+sys.path.append('/zap/custom_hooks')
 import zap_auth_custo
 import zap_config_custo
 import zap_blindxss
